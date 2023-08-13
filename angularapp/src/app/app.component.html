@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="foodDetails">
+    Food Search :
+    <input
+      type="text"
+      name="search"
+      [(ngModel)]="searchText"
+      autocomplete="off"
+      id="searchBox"
+    />
+    <br />
+    <br />
+    <button
+      id="newFood"
+      (click)="addItem(item.value, calories.value, image.value)"
+    >
+      Sumbit
+    </button>
+    <br />
+    <br />
+    Name:<input type="text" #item id="name" />
+    <br />
+    <br />
+    Calories:<input type="text" #calories id="calories" />
+    <br />
+    <br />
+    Image:<input type="text" #image id="image" />
+  </div>
+  <div id="totalCalories">
+    <h5>
+      Today's Food &emsp;
+      {{ totalCal }}
+      cal
+    </h5>
+    <ul *ngFor="let x of todayFood">
+      <li>
+        <table>
+          <tr>
+            <td>
+              {{ x.food }}
+            </td>
+            <td>
+              {{ x.calories }}
+            </td>
+          </tr>
+        </table>
+      </li>
+    </ul>
+  </div>
+</div>
+<div id="displayContainer">
+  <table>
+    <tr *ngFor="let x of list | filter : searchText; index as i">
+      <td>
+        <img src="{{ x.image }}" alt="" width="200" height="200" />
+      </td>
+      <!--<button (click)="removeFood(i)">Remove</button>-->
+      <td>{{ x.name }}</td>
+      <td>(Calory-{{ x.calories }})</td>
+      <td><input type="number" #add /></td>
+      <td>
+        <button (click)="addFood(x.name, x.calories, add.value)">Add</button>
+      </td>
+    </tr>
+  </table>
+</div>
